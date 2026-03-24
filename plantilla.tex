@@ -1,0 +1,459 @@
+% ============================================================
+%  Plantilla para el Proyecto Final de Aprendizaje Automático
+%  Escuela Politécnica Superior — Universidad de Alicante
+%  Formato: artículo científico (una columna)
+% ============================================================
+
+\documentclass[11pt,a4paper]{article}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage[spanish,es-tabla]{babel}
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{array}
+\usepackage{float}
+\usepackage{listings}
+\usepackage{xcolor}
+
+\lstset{
+    language=Python,
+    basicstyle=\ttfamily\footnotesize,
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray},
+    stringstyle=\color{red!70!black},
+    showstringspaces=false,
+    breaklines=true,
+    frame=single,
+    numbers=left,
+    numberstyle=\tiny\color{gray}
+}
+
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue!70!black,
+    citecolor=blue!70!black,
+    urlcolor=blue!70!black
+}
+
+% Configuración de bloques de orientación
+\usepackage{mdframed}
+
+\newmdenv[
+  backgroundcolor=blue!6,
+  linecolor=blue!50!black,
+  linewidth=1pt,
+  roundcorner=4pt,
+  innerleftmargin=8pt,
+  innerrightmargin=8pt,
+  innertopmargin=6pt,
+  innerbottommargin=6pt,
+  skipabove=6pt,
+  skipbelow=4pt
+]{orientacion}
+
+\newcommand{\orientaciontitle}{%
+  {\small\bfseries\color{blue!60!black}Orientación}\par\smallskip
+}
+
+% Otros 
+\usepackage{microtype}
+
+
+% ============================================================
+%  DATOS DEL TRABAJO 
+% ============================================================
+
+\title{
+    \textbf{[Título del trabajo]}\\[4pt]
+    \large [Subtítulo opcional]
+}
+
+\author{
+    \textbf{[Nombre Apellido1]}\thanks{\texttt{[email1@alu.ua.es]}}
+    \quad
+    \textbf{[Nombre Apellido2]}\thanks{\texttt{[email2@alu.ua.es]}}
+    \quad
+    \textbf{[Nombre Apellido3]}\thanks{\texttt{[email3@alu.ua.es]}}
+    \\[4pt]
+    \small Grado en Ingeniería en Inteligencia Artificial
+    --- Escuela Politécnica Superior, Universidad de Alicante\\
+    \small Aprendizaje Avanzado --- Curso 2025/2026
+}
+
+\date{}
+
+% ============================================================
+
+\begin{document}
+
+\maketitle
+\thispagestyle{empty}
+
+% Abstract 
+
+\begin{abstract}
+\textit{Resumen del trabajo en 150--250 palabras. Debe incluir:
+(1)~el problema abordado y su relevancia real,
+(2)~el \textit{dataset} utilizado,
+(3)~las problemáticas identificadas y las técnicas aplicadas,
+(4)~los resultados principales.
+\textbf{Escríbelo al final, una vez completado el trabajo.}}
+\end{abstract}
+
+\smallskip
+\noindent\textbf{Palabras clave:} aprendizaje automático, [problemática 1], [problemática 2], [dataset], [otra palabra clave].
+
+\tableofcontents
+\newpage
+
+
+% ============================================================
+\section{Introducción}
+% ============================================================
+
+\begin{orientacion}
+\orientaciontitle
+\textit{La introducción debe responder a cuatro preguntas: (1)~?`Cuál es el problema y por qué es relevante? (2)~?`Qué implicaciones éticas, sociales o legales tiene? (3)~?`Qué se propone hacer este trabajo? (4)~?`Cómo se organiza el resto del documento? No es un resumen del trabajo, sino una motivación y contextualización.}
+\end{orientacion}
+
+[Introducción aquí: 3--4 párrafos.]
+
+El resto del artículo se organiza como sigue.
+La Sección~\ref{sec:related} revisa el trabajo relacionado.
+La Sección~\ref{sec:datos} describe el \textit{dataset} y el análisis exploratorio.
+La Sección~\ref{sec:metodologia} detalla la metodología.
+La Sección~\ref{sec:resultados} presenta los resultados experimentales.
+La Sección~\ref{sec:discusion} discute las implicaciones.
+La Sección~\ref{sec:conclusiones} concluye el trabajo.
+
+
+% ============================================================
+\section{Trabajo Relacionado}
+\label{sec:related}
+% ============================================================
+
+\begin{orientacion}
+\orientaciontitle
+\textit{No se trata de resumir trabajos uno a uno, sino de sintetizar la literatura de forma crítica: ?`qué se ha hecho antes?, ?`qué limitaciones tienen esos enfoques?, ?`cómo se sitúa este trabajo respecto al estado del arte? Organiza la sección por temática en lugar de por autor. Cita al menos 5--6 referencias de calidad~\cite{ref1}.}
+\end{orientacion}
+
+\subsection{[Trabajos sobre el problema abordado]}
+
+[Síntesis de trabajos previos sobre el mismo problema o \textit{dataset}~\cite{ref1, ref2}.]
+
+\subsection{[Técnicas para la problemática 1]}
+
+[Resumen del estado del arte en la primera problemática identificada~\cite{ref3}.]
+
+\subsection{[Técnicas para la problemática 2]}
+
+[Resumen del estado del arte en la segunda problemática identificada~\cite{ref4}.]
+
+
+% ============================================================
+\section{Descripción del Problema y los Datos}
+\label{sec:datos}
+% ============================================================
+
+\subsection{Definición formal de la tarea}
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Define formalmente la tarea de aprendizaje: tipo de tarea (clasificación, regresión\ldots), espacio de entrada y salida, y función objetivo. Por ejemplo: dado un vector de \textit{features} $\bm{x} \in \mathbb{R}^d$, aprender $f\colon \mathbb{R}^d \to \mathcal{Y}$ que minimiza $\mathcal{L}(f) = \mathbb{E}_{(\bm{x},y)\sim P}[\ell(f(\bm{x}),y)]$.}
+\end{orientacion}
+
+[Definición formal de la tarea aquí.]
+
+\subsection{Dataset}
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Describe el \textit{dataset}: origen, licencia, número de instancias, número de \textit{features}, variable objetivo y distribución de clases. Incluye también las consideraciones éticas sobre su uso: ?`quiénes son los individuos representados?, ?`cómo se recogieron los datos?, ?`hay sesgos de selección conocidos?}
+\end{orientacion}
+
+La Tabla~\ref{tab:dataset} resume las características principales del \textit{dataset} utilizado.
+
+\begin{table}[H]
+\centering
+\caption{Características del \textit{dataset}.}
+\label{tab:dataset}
+\small
+\begin{tabular}{@{}ll@{}}
+\toprule
+\textbf{Característica} & \textbf{Valor} \\
+\midrule
+Fuente / enlace           & [UCI / Kaggle / \ldots] \\
+Número de instancias  & \\
+Número de \textit{features} & \\
+Variable objetivo         & \\
+Distribución de clases & [X\,\% clase 0 / Y\,\% clase 1] \\
+Valores ausentes          & [Sí / No --- estrategia de imputación] \\
+Licencia                  & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Análisis exploratorio (EDA)}
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Incluye las visualizaciones más informativas: distribución de la variable objetivo, correlaciones relevantes, distribución de variables sensibles si las hay. El EDA debe estar orientado a identificar las problemáticas del trabajo, no ser un catálogo exhaustivo de gráficas.}
+\end{orientacion}
+
+[Análisis exploratorio aquí: 2--3 párrafos con las figuras más relevantes.]
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.7\textwidth]{figuras/eda.pdf}
+\textit{[Insertar figura del EDA.]}
+\caption{[Descripción de la figura del EDA.]}
+\label{fig:eda}
+\end{figure}
+
+\subsection{Problemáticas identificadas}
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Justifica aquí qué problemáticas son relevantes para este problema concreto. La argumentación debe basarse en: (1)~el contexto de uso real del sistema (?`quién usa el modelo?, ?`sobre quién toma decisiones?), (2)~las características del \textit{dataset} (?`hay atributos sensibles?, ?`está desbalanceado?), y (3)~las obligaciones legales aplicables (RGPD, AI Act).}
+\end{orientacion}
+
+A partir del análisis del \textit{dataset} y del contexto de uso del sistema, se han identificado las siguientes problemáticas:
+
+\begin{itemize}
+    \item \textbf{[Problemática 1]:} [Justificación.]
+    \item \textbf{[Problemática 2]:} [Justificación.]
+\end{itemize}
+
+
+% ============================================================
+\section{Metodología}
+\label{sec:metodologia}
+% ============================================================
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Esta sección debe ser suficientemente detallada para que el trabajo sea reproducible. Describe el \textit{pipeline} completo, justifica cada decisión de dise\~{n}o, e incluye la formulación matemática de las técnicas que lo requieran.}
+\end{orientacion}
+
+\subsection{Preprocesamiento}
+
+[Cadena de preprocesamiento: imputación de valores ausentes, escalado, codificación de variables categóricas, división train/test y estratificación.]
+
+\subsection{Modelo \textit{baseline}}
+
+\begin{orientacion}
+\orientaciontitle
+\textit{El \textit{baseline} es el punto de referencia contra el que compararás las técnicas aplicadas. Elige un modelo estándar apropiado para la tarea y justifica su elección.}
+\end{orientacion}
+
+[Descripción del modelo \textit{baseline} y justificación.]
+
+\subsection{Tratamiento de la problemática 1: [nombre]}
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Describe la técnica aplicada. Incluye la formulación matemática cuando sea necesaria para entender el método. Justifica por qué esta técnica es adecuada para el problema y el \textit{dataset} elegidos.}
+\end{orientacion}
+
+[Descripción, formulación y justificación.]
+
+% Ejemplo de ecuación numerada:
+% \begin{equation}
+%   \min_{w} \mathcal{L}(w) \quad \text{s.a.} \quad
+%   \bigl|P(\hat{Y}=1 \mid A=a) - P(\hat{Y}=1 \mid A=b)\bigr| \leq \epsilon
+%   \label{eq:ejemplo}
+% \end{equation}
+
+\subsection{Tratamiento de la problemática 2: [nombre]}
+
+[Descripción, formulación y justificación.]
+
+\subsection{Protocolo de evaluación}
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Describe cómo se evalúan los modelos: tipo de validación cruzada, métricas elegidas y justificación de su elección. Si el \textit{dataset} está desbalanceado, justifica el uso de métricas robustas (F1, AUC-ROC, etc.) en lugar de \textit{accuracy}.}
+\end{orientacion}
+
+[Descripción del protocolo de evaluación y justificación de las métricas elegidas.]
+
+
+% ============================================================
+\section{Experimentos y Resultados}
+\label{sec:resultados}
+% ============================================================
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Esta sección presenta los resultados sin interpretarlos (la interpretación va en la Sección~\ref{sec:discusion}). Usa tablas comparativas que permitan ver claramente la diferencia entre el \textit{baseline} y cada intervención. Reporta siempre media $\pm$ desviación estándar cuando uses validación cruzada.}
+\end{orientacion}
+
+\subsection{Configuración experimental}
+
+[Entorno de experimentación: versiones de librerías principales y semilla aleatoria fijada.]
+
+\begin{lstlisting}[caption={Semilla aleatoria y versiones principales.}]
+import numpy as np
+SEED = 42
+np.random.seed(SEED)
+# sklearn.__version__ = X.X.X
+\end{lstlisting}
+
+\subsection{Resultados comparativos}
+
+La Tabla~\ref{tab:resultados} compara el rendimiento del \textit{baseline} con los modelos que incorporan las técnicas para cada problemática.
+
+\begin{table}[H]
+\centering
+\caption{Comparativa de resultados (media $\pm$ desv. estándar, validación cruzada 5~\textit{folds}).}
+\label{tab:resultados}
+\small
+\begin{tabular}{@{}lcccc@{}}
+\toprule
+\textbf{Modelo / Configuración} & \textbf{AUC-ROC} & \textbf{F1} & \textbf{Métrica específica} & \textbf{Tiempo (s)} \\
+\midrule
+\textit{Baseline}        & $0.XX \pm 0.XX$ & $0.XX \pm 0.XX$ & --- & \\
++ Problemática 1     & $0.XX \pm 0.XX$ & $0.XX \pm 0.XX$ & $0.XX$ & \\
++ Problemática 2     & $0.XX \pm 0.XX$ & $0.XX \pm 0.XX$ & $0.XX$ & \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Resultados específicos por problemática}
+
+[Figuras o tablas específicas de cada problemática: \textit{summary plot} de SHAP, curva privacidad--utilidad, comparativa de métricas de \textit{fairness}, etc.]
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.7\textwidth]{figuras/resultado_p1.pdf}
+\textit{[Insertar figura específica de la problemática 1.]}
+\caption{[Descripción del resultado de la problemática 1.]}
+\label{fig:resultado_p1}
+\end{figure}
+
+\begin{figure}[H]
+\centering
+% \includegraphics[width=0.7\textwidth]{figuras/resultado_p2.pdf}
+\textit{[Insertar figura específica de la problemática 2.]}
+\caption{[Descripción del resultado de la problemática 2.]}
+\label{fig:resultado_p2}
+\end{figure}
+
+
+% ============================================================
+\section{Discusión}
+\label{sec:discusion}
+% ============================================================
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Interpreta los resultados en el contexto del problema real: ?`qué significan para los usuarios afectados por el sistema? Analiza las limitaciones con rigor y evita afirmaciones genéricas sobre ética; las implicaciones deben ser específicas y estar fundamentadas en los resultados obtenidos.}
+\end{orientacion}
+
+\subsection{Interpretación de los resultados}
+
+[Interpreta los resultados en el contexto del problema real: 2--3 párrafos.]
+
+\subsection{Limitaciones}
+
+[Identifica y analiza las limitaciones no triviales: supuestos asumidos, restricciones del \textit{dataset}, limitaciones de las técnicas aplicadas.]
+
+\subsection{Implicaciones éticas, legales y sociales}
+
+[Reflexión sobre las implicaciones reales del sistema. ?`Cómo afectan los resultados a los grupos implicados? ?`Qué obligaciones legales aplicarían bajo el RGPD o el AI Act?]
+
+
+% ============================================================
+\section{Conclusiones}
+\label{sec:conclusiones}
+% ============================================================
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Síntesis de las contribuciones en 3--4 párrafos. Lecciones aprendidas. Líneas de trabajo futuro concretas y bien motivadas (no genéricas como ``aplicar \textit{deep learning}").}
+\end{orientacion}
+
+[Conclusiones aquí: 3--4 párrafos.]
+
+
+% ============================================================
+%  REFERENCIAS
+% ============================================================
+
+\begin{thebibliography}{99}
+
+\bibitem{ref1}
+A. Autor1 y B. Autor2,
+``Título del artículo,''
+\textit{Nombre de la Revista},
+vol.~X, núm.~Y, pp.~ZZ--ZZ, a\~{n}o.
+\href{https://doi.org/XX.XXXX/XXXXXXX}{DOI:XX.XXXX/XXXXXXX}
+
+\bibitem{ref2}
+C. Autor3,
+``Título del artículo,''
+in \textit{Proc. Nombre de la Conferencia (ABREV)},
+Ciudad, País, a\~{n}o, pp.~ZZ--ZZ.
+
+\bibitem{ref3}
+D. Autor4, E. Autor5 y F. Autor6,
+``Título del artículo,''
+\textit{arXiv preprint arXiv:XXXX.XXXXX}, a\~{n}o.
+\href{https://arxiv.org/abs/XXXX.XXXXX}{arXiv:XXXX.XXXXX}
+
+\bibitem{ref4}
+G. Autor7,
+\textit{Título del libro},
+N.\ ed.
+Ciudad: Editorial, a\~{n}o.
+
+% Añadir el resto de referencias aquí
+
+\end{thebibliography}
+
+
+% ============================================================
+%  ANEXOS (opcionales)
+% ============================================================
+
+\appendix
+
+\section{Contribución individual}
+
+\begin{table}[H]
+\centering
+\caption{Contribución de cada miembro del grupo.}
+\small
+\begin{tabular}{ll}
+\toprule
+\textbf{Miembro} & \textbf{Contribución principal} \\
+\midrule
+{[}Nombre Apellido1{]} & {[}EDA, preprocesamiento, Sección~3{]} \\
+{[}Nombre Apellido2{]} & {[}Implementación problemática 1, Sección~4.3{]} \\
+{[}Nombre Apellido3{]} & {[}Implementación problemática 2, Sección~4.4{]} \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\section{Enlace al repositorio}
+
+El código fuente del trabajo está disponible en:
+\url{https://github.com/[usuario]/[nombre-repositorio]}
+
+\section{Uso de herramientas de IA generativa}
+
+\begin{orientacion}
+\orientaciontitle
+\textit{Indica si has utilizado herramientas de IA generativa (ChatGPT, GitHub Copilot, etc.) en la elaboración del trabajo, cómo las has usado y en qué partes. Si no se han utilizado, indícalo explícitamente.}
+\end{orientacion}
+
+[Descripción del uso, o bien: ``No se han utilizado herramientas de IA generativa en la elaboración de este trabajo".]
+
+\end{document}
