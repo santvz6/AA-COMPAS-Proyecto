@@ -1,0 +1,10 @@
+numpy
+pandas
+scikit-learn
+
+matplotlib
+seaborn
+
+# Fairness y Explicabilidad (XAI)
+fairlearn
+shap
