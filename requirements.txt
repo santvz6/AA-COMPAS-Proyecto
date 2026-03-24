@@ -1,10 +1,22 @@
+# Core dependencies
 numpy
 pandas
 scikit-learn
-
 matplotlib
 seaborn
+jupyter
 
-# Fairness y Explicabilidad (XAI)
+# Fairness and XAI
 fairlearn
+aif360
 shap
+lime
+dice-ml
+
+# Robustness and Drift
+adversarial-robustness-toolbox
+evidently
+
+# Utils
+python-dotenv
+tqdm

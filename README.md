@@ -1,22 +1,39 @@
-# Proyecto Final: Análisis de Sesgo Racial en COMPAS
+# Análisis de Sesgo Racial en el Dataset COMPAS
 
-Este repositorio contiene el código fuente para el proyecto final de la asignatura "Aprendizaje Avanzado". El objetivo es evaluar y mitigar el sesgo racial en la predicción de reincidencia utilizando el dataset COMPAS, simulando el impacto de un sistema de soporte a decisiones judiciales.
+Este proyecto tiene como objetivo analizar y mitigar el sesgo racial en el sistema COMPAS (Correctional Offender Management Profiling for Alternative Sanctions), utilizado para predecir la reincidencia criminal.
 
 ## Estructura del Proyecto
 
-- `data/`: Directorio para almacenar el dataset (RAW y procesado).
-- `notebooks/`: Cuadernos Jupyter o scripts para análisis exploratorio (EDA) y experimentación paso a paso.
-- `src/`: Código fuente modular con la lógica de preprocesamiento, modelado y evaluación.
-- `informe/`: Código fuente LaTeX del informe final.
+El proyecto sigue una estructura profesional y escalable:
 
-## Instalación
+- `data/`: Datos crudos (`raw`), procesados (`processed`) y externos (`external`).
+- `notebooks/`: Cuadernos Jupyter para análisis exploratorio, identificación de sesgo y experimentos.
+- `src/`: Código fuente modularizado para carga de datos, ingeniería de características (features), modelado y visualización.
+- `models/`: Modelos entrenados y serializados.
+- `reports/`: Borrador del artículo científico y figuras generadas.
+- `docs/`: Documentación adicional.
+- `tests/`: Pruebas unitarias para el código de `src/`.
 
-Se recomienda crear un entorno virtual e instalar las dependencias exactas usando:
+## Requisitos
+
+Para instalar las dependencias necesarias, ejecuta:
 
 ```bash
 pip install -r requirements.txt
 ```
 
-## Reproducibilidad
+## Dataset
 
-Para garantizar la reproducibilidad de los resultados (como se exige en el enunciado), todos los scripts y módulos establecen semillas aleatorias fijas (`SEED = 42`).
+El dataset principal es **COMPAS Recidivism**, obtenido originalmente por ProPublica. Se centra en la predicción de reincidencia a dos años y en la comparación de tasas de falsos positivos entre individuos afroamericanos y caucásicos.
+
+## Metodología
+
+1. **Definición del Problema**: Justificación de la importancia del sesgo en algoritmos judiciales.
+2. **EDA**: Análisis profundo de los datos e identificación de sesgos existentes.
+3. **Baseline**: Entrenamiento de un modelo estándar.
+4. **Intervención**: Aplicación de técnicas de Fairness (mitigación de sesgo) y explicabilidad (XAI).
+5. **Evaluación**: Comparativa de resultados antes y después de aplicar técnicas de equidad.
+6. **Discusión**: Reflexión sobre las implicaciones éticas y legales.
+
+---
+*Proyecto para la asignatura: Aprendizaje Automático en Problemas del Mundo Real.*
