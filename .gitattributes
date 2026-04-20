@@ -1,0 +1,5 @@
+*.ipynb filter=nbstripout
+*.zpln filter=nbstripout
+*.ipynb diff=ipynb
+
+# nbstripout --install --attributes .gitattributes --extra-keys "metadata.kernelspec metadata.language_info.version"
