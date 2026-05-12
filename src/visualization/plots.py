@@ -165,7 +165,7 @@ def plot_accuracy_fairness_tradeoff(df_comparison: pd.DataFrame,
     Ideal point is top-left (high accuracy, low disparity).
     """
     set_style()
-    fig, ax = plt.subplots(figsize=(7, 5))
+    fig, ax = plt.subplots(figsize=(9, 5))
     colors = list(PALETTE.values())[:len(df_comparison)]
 
     for (name, row), color in zip(df_comparison.iterrows(), colors):
@@ -181,7 +181,7 @@ def plot_accuracy_fairness_tradeoff(df_comparison: pd.DataFrame,
         '(esquina inferior-derecha = óptimo)',
         fontsize=11
     )
-    ax.legend(title='Enfoque', bbox_to_anchor=(1.01, 1), loc='upper left',
+    ax.legend(title='Enfoque', bbox_to_anchor=(1.3, 1), loc='upper left',
               fontsize=8)
     ax.annotate('Óptimo', xy=(ax.get_xlim()[1], 0),
                 xytext=(ax.get_xlim()[1] - 0.04, 0.03),
