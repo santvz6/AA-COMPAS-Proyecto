@@ -11,7 +11,7 @@ def get_data_splits(
     target_col: str, 
     sensitive_col: str, 
     test_size: float = 0.2, 
-    random_state: int = 42
+    random_state: int = 80
 ) -> Tuple[pd.DataFrame, pd.DataFrame, pd.Series, pd.Series, pd.Series, pd.Series]:
     """
     Splits the data into train and test sets BEFORE any feature engineering 

@@ -3,7 +3,7 @@ from sklearn.linear_model import LogisticRegression
 from sklearn.pipeline import Pipeline
 from fairlearn.postprocessing import ThresholdOptimizer
 
-def train_baseline(X_train: pd.DataFrame, y_train: pd.Series, preprocessor, random_state: int = 42) -> Pipeline:
+def train_baseline(X_train: pd.DataFrame, y_train: pd.Series, preprocessor, random_state: int = 80) -> Pipeline:
     """
     Trains a baseline Logistic Regression model using the provided preprocessor.
     """
@@ -24,7 +24,7 @@ def train_fair_model(
     y_train: pd.Series, 
     A_train: pd.Series,
     constraint: str = "demographic_parity",
-    random_state: int = 42
+    random_state: int = 80
 ) -> ThresholdOptimizer:
     """
     Trains a mitigated model using ThresholdOptimizer on top of the baseline model.
