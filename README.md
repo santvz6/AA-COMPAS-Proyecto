@@ -181,4 +181,4 @@ Tras ejecutar el pipeline completo encontrarás en `reports/figures/`:
 
 ## 7. Equipo
 
-Proyecto desarrollado por Santiago Álvarez, Taron Sargsyan y Joaquín Sigüenza Chilar para la asignatura **Aprendizaje Automático en Problemas del Mundo Real** (Universidad de Alicante).
+Proyecto desarrollado por Santiago Álvarez, Taron Sargsyan y Joaquín Sigüenza Chilar para la asignatura **Aprendizaje Automático** (Universidad de Alicante).
