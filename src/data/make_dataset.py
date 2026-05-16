@@ -34,9 +34,12 @@ def clean_compas_data(input_path: str, output_path: str) -> None:
     cols_to_keep = [
         'sex', 'age', 'age_cat', 'race', 
         'juv_fel_count', 'juv_misd_count', 'juv_other_count', 'priors_count',
-        'c_charge_degree', 'c_charge_desc',
-        'score_text', 'decile_score', # Target of bias
+        'c_charge_degree', 
         'two_year_recid' # Target feature to predict
+        
+        # 'c_charge_desc',              # Too many categories
+        # 'score_text', 'decile_score', # Target of bias
+        
     ]
     
     # Check if all cols exist

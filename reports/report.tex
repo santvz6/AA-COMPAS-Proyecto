@@ -156,7 +156,7 @@ El \textit{dataset} \textit{COMPAS Recidivism — Two-Year} fue recopilado y pub
 \midrule
 Fuente / enlace           & ProPublica (GitHub: \texttt{propublica/compas-analysis}) \\
 Número de instancias      & $\approx 6\,000$ (tras filtrado y selección de razas) \\
-Número de \textit{features} (modelado) & 9 (4 numéricas, 5 categóricas)\\
+Número de \textit{features} (modelado) & 8 (5 numéricas, 3 categóricas)\\
 Variable objetivo         & \texttt{two\_year\_recid} (binaria) \\
 Atributo sensible         & \texttt{race} $\in\{$African-American, Caucasian$\}$ \\
 Distribución de clases    & $\approx 55\,\%$ no reincide $/\;45\,\%$ reincide \\
@@ -172,7 +172,7 @@ El EDA persigue tres objetivos: \emph{(i)}~verificar el desbalanceo de clases, \
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{group_metrics_heatmap}
+\includegraphics[width=0.85\textwidth]{./figures/group_metrics_heatmap}
 \caption{Métricas por grupo racial (\textit{accuracy}, precisión, \textit{recall}, F1, FPR, FNR) para el modelo \textit{baseline} y las tres intervenciones de equidad evaluadas. La fila del \textit{baseline} evidencia la disparidad de FPR (mayor en African-American) y de FNR (mayor en Caucasian) consistente con el resultado de ProPublica.}
 \label{fig:eda}
 \end{figure}
@@ -197,7 +197,7 @@ A partir del análisis del \textit{dataset} y del contexto de uso del sistema, s
 
 Se aplican los filtros canónicos de ProPublica~\cite{propublica_compas_2016}: se descartan los registros con $|\,$\texttt{days\_b\_screening\_arrest}$\,|>30$, los marcados con \texttt{is\_recid}~$=-1$, los cargos de orden judicial (\texttt{c\_charge\_degree}~$=$~`O') y las puntuaciones inválidas. Posteriormente se restringe el análisis a los acusados de raza afroamericana y caucásica para reproducir el contraste binario del estudio original.
 
-Tras el filtrado se construye el conjunto de \textit{features} de modelado (variables numéricas: \texttt{age}, \texttt{priors\_count}, \texttt{juv\_fel\_count}, \texttt{juv\_misd\_count}, \texttt{juv\_other\_count}; variables categóricas: \texttt{sex}, \texttt{age\_cat}, \texttt{c\_charge\_degree}, \texttt{score\_text}). Se excluye \texttt{c\_charge\_desc} (alta cardinalidad sin agrupación semántica) y \texttt{decile\_score} (es la propia salida del sistema COMPAS, no una \textit{feature} predictiva genuina). La división \emph{estratificada} \textit{train/test} se realiza con \texttt{test\_size}$=0{,}2$ y \texttt{random\_state}$=80$, manteniendo la prevalencia del objetivo en ambos conjuntos. Críticamente, el \texttt{ColumnTransformer} (imputación por mediana + \texttt{StandardScaler} para numéricas; imputación por moda + \texttt{OneHotEncoder} con \texttt{handle\_unknown=`ignore'} para categóricas) se ajusta \emph{exclusivamente} sobre el conjunto de entrenamiento, dentro de un \texttt{sklearn.Pipeline}, para garantizar la ausencia de \textit{data leakage}.
+Tras el filtrado se construye el conjunto de \textit{features} de modelado (variables numéricas: \texttt{age}, \texttt{priors\_count}, \texttt{juv\_fel\_count}, \texttt{juv\_misd\_count}, \texttt{juv\_other\_count}; variables categóricas: \texttt{sex}, \texttt{age\_cat}, \texttt{c\_charge\_degree}). Se excluye \texttt{c\_charge\_desc} (alta cardinalidad sin agrupación semántica) y \texttt{decile\_score} (es la propia salida del sistema COMPAS, no una \textit{feature} predictiva genuina). La división \emph{estratificada} \textit{train/test} se realiza con \texttt{test\_size}$=0{,}2$ y \texttt{random\_state}$=80$, manteniendo la prevalencia del objetivo en ambos conjuntos. Críticamente, el \texttt{ColumnTransformer} (imputación por mediana + \texttt{StandardScaler} para numéricas; imputación por moda + \texttt{OneHotEncoder} con \texttt{handle\_unknown=`ignore'} para categóricas) se ajusta \emph{exclusivamente} sobre el conjunto de entrenamiento, dentro de un \texttt{sklearn.Pipeline}, para garantizar la ausencia de \textit{data leakage}.
 
 \subsection{Modelo \textit{baseline}}
 
@@ -290,28 +290,28 @@ La Figura~\ref{fig:fairness_comparison} resume la comparación de \textit{accura
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{fairness_comparison}
+\includegraphics[width=0.85\textwidth]{./figures/fairness_comparison}
 \caption{Comparativa de \textit{accuracy} y métricas de equidad (\textit{DP diff.}, \textit{FPR diff.}, \textit{EO diff.}) entre el \textit{baseline} y las tres intervenciones.}
 \label{fig:fairness_comparison}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.75\textwidth]{tradeoff_scatter}
+\includegraphics[width=0.75\textwidth]{./figures/tradeoff_scatter}
 \caption{\textit{Accuracy-fairness trade-off}: cada punto representa un modelo en el plano (\,FPR diff., \textit{accuracy}\,). El punto ideal está arriba a la izquierda.}
 \label{fig:tradeoff}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{shap_summary}
+\includegraphics[width=0.85\textwidth]{./figures/shap_summary}
 \caption{Valores SHAP del modelo \textit{baseline}. Las variables \texttt{priors\_count} y \texttt{age} dominan la predicción; al estar correlacionadas con la raza por razones estructurales, actúan como \textit{proxies} y son la fuente principal del sesgo observado.}
 \label{fig:shap}
 \end{figure}
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.85\textwidth]{confusion_matrices}
+\includegraphics[width=0.85\textwidth]{./figures/confusion_matrices}
 \caption{Matrices de confusión normalizadas para las cuatro configuraciones. Se observa el reequilibrio de FP/FN inducido por cada criterio de equidad.}
 \label{fig:cm}
 \end{figure}
@@ -321,7 +321,7 @@ La Figura~\ref{fig:robustness} muestra la caída de \textit{accuracy} del \texti
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{robustness_fgm}
+\includegraphics[width=0.7\textwidth]{./figures/robustness_fgm}
 \caption{Comparativa de \textit{accuracy} limpia frente a \textit{accuracy} adversaria (FGM, $\varepsilon=0{,}1$) sobre el conjunto de test.}
 \label{fig:robustness}
 \end{figure}
