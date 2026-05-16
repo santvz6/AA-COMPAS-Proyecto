@@ -1,20 +1,20 @@
 # Core dependencies
-numpy
-pandas
-scikit-learn
+numpy==2.4.4
+pandas==3.0.2
+scikit-learn==1.8.0
 matplotlib
 seaborn
 jupyter
 
 # Fairness and XAI
-fairlearn
+fairlearn==0.13.0
 aif360
-shap
+shap==0.51.0
 lime
 dice-ml
 
 # Robustness and Drift
-adversarial-robustness-toolbox
+adversarial-robustness-toolbox==1.20.1
 evidently
 
 # Utils
