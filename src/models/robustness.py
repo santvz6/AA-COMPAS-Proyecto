@@ -4,7 +4,7 @@ from art.estimators.classification import SklearnClassifier
 from art.attacks.evasion import FastGradientMethod
 from sklearn.pipeline import Pipeline
 
-def evaluate_robustness(model: Pipeline, X_test: pd.DataFrame, y_test: pd.Series) -> dict:
+def evaluate_robustness(model: Pipeline, X_test: pd.DataFrame, y_test: pd.Series, eps: float = 0.1) -> dict:
     """
     Evaluates the robustness of the model using an evasion attack (FGM).
     """
@@ -22,7 +22,7 @@ def evaluate_robustness(model: Pipeline, X_test: pd.DataFrame, y_test: pd.Series
     accuracy_baseline = np.sum(np.argmax(predictions, axis=1) == y_test.values) / len(y_test)
     
     # Craft adversarial samples
-    attack = FastGradientMethod(estimator=art_classifier, eps=0.1)
+    attack = FastGradientMethod(estimator=art_classifier, eps=eps)
     X_test_adv = attack.generate(x=X_test_transformed)
     
     # Adversarial accuracy

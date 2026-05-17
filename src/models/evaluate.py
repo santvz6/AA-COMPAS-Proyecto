@@ -119,3 +119,55 @@ def cross_validate_baseline(pipeline, X_train: pd.DataFrame,
             'std':    round(scores.std(), 4),
         })
     return pd.DataFrame(rows)
+
+
+def cross_validate_all_models(X_train: pd.DataFrame, y_train: pd.Series, A_train: pd.Series, preprocessor, seed: int = 80) -> pd.DataFrame:
+    """
+    Evaluates Baseline and Fair Models using 5-fold Stratified CV.
+    Returns a DataFrame with AUC-ROC and F1 means and stds for each model.
+    """
+    from sklearn.metrics import f1_score, roc_auc_score
+    from .train_model import train_baseline, train_fair_model
+    import numpy as np
+
+    cv = StratifiedKFold(n_splits=5, shuffle=True, random_state=seed)
+
+    results_cv = {'Baseline': {'f1': [], 'auc': []}, 
+                  'Demographic Parity': {'f1': [], 'auc': []},
+                  'FPR Parity': {'f1': [], 'auc': []},
+                  'Equalized Odds': {'f1': [], 'auc': []}}
+
+    for train_idx, val_idx in cv.split(X_train, y_train):
+        X_tr, X_val = X_train.iloc[train_idx], X_train.iloc[val_idx]
+        y_tr, y_val = y_train.iloc[train_idx], y_train.iloc[val_idx]
+        A_tr, A_val = A_train.iloc[train_idx], A_train.iloc[val_idx]
+        
+        base_model = train_baseline(X_tr, y_tr, preprocessor, seed)
+        y_pred_proba_base = base_model.predict_proba(X_val)[:, 1]
+        y_pred_base = base_model.predict(X_val)
+        results_cv['Baseline']['f1'].append(f1_score(y_val, y_pred_base))
+        results_cv['Baseline']['auc'].append(roc_auc_score(y_val, y_pred_proba_base))
+        
+        fm_dp = train_fair_model(base_model, X_tr, y_tr, A_tr, constraint='demographic_parity')
+        fm_fpr = train_fair_model(base_model, X_tr, y_tr, A_tr, constraint='false_positive_rate_parity')
+        fm_eo = train_fair_model(base_model, X_tr, y_tr, A_tr, constraint='equalized_odds')
+        
+        y_pred_dp_val = fm_dp.predict(X_val, sensitive_features=A_val)
+        y_pred_fpr_val = fm_fpr.predict(X_val, sensitive_features=A_val)
+        y_pred_eo_val = fm_eo.predict(X_val, sensitive_features=A_val)
+        
+        results_cv['Demographic Parity']['f1'].append(f1_score(y_val, y_pred_dp_val))
+        results_cv['Demographic Parity']['auc'].append(roc_auc_score(y_val, y_pred_dp_val))
+        results_cv['FPR Parity']['f1'].append(f1_score(y_val, y_pred_fpr_val))
+        results_cv['FPR Parity']['auc'].append(roc_auc_score(y_val, y_pred_fpr_val))
+        results_cv['Equalized Odds']['f1'].append(f1_score(y_val, y_pred_eo_val))
+        results_cv['Equalized Odds']['auc'].append(roc_auc_score(y_val, y_pred_eo_val))
+
+    rows = []
+    for model_name, metrics in results_cv.items():
+        rows.append({
+            'Model': model_name,
+            'AUC-ROC': f"{np.mean(metrics['auc']):.4f} ± {np.std(metrics['auc']):.4f}",
+            'F1': f"{np.mean(metrics['f1']):.4f} ± {np.std(metrics['f1']):.4f}"
+        })
+    return pd.DataFrame(rows).set_index('Model')

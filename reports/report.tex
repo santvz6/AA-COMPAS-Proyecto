@@ -273,15 +273,15 @@ La Tabla~\ref{tab:resultados} compara el rendimiento del \textit{baseline} con l
 \toprule
 \textbf{Modelo / Configuración} & \textbf{AUC-ROC} & \textbf{F1} & \textbf{DPD} & \textbf{EOD} & \textbf{FPR diff.}\\
 \midrule
-\textit{Baseline} (Reg. Log.)   & $0{,}XX \pm 0{,}XX$ & $0{,}XX \pm 0{,}XX$ & $0{,}XX$ & $0{,}XX$ & $0{,}XX$ \\
-+ Demographic Parity            & $0{,}XX \pm 0{,}XX$ & $0{,}XX \pm 0{,}XX$ & $0{,}XX$ & $0{,}XX$ & $0{,}XX$ \\
-+ FPR Parity                    & $0{,}XX \pm 0{,}XX$ & $0{,}XX \pm 0{,}XX$ & $0{,}XX$ & $0{,}XX$ & $0{,}XX$ \\
-+ Equalized Odds                & $0{,}XX \pm 0{,}XX$ & $0{,}XX \pm 0{,}XX$ & $0{,}XX$ & $0{,}XX$ & $0{,}XX$ \\
+\textit{Baseline} (Reg. Log.)   & $0{,}7312 \pm 0{,}0210$ & $0{,}6393 \pm 0{,}0276$ & $0{,}2899$ & $0{,}3023$ & $0{,}2055$ \\
++ Demographic Parity            & $0{,}6605 \pm 0{,}0186$ & $0{,}6296 \pm 0{,}0178$ & $0{,}0312$ & $0{,}0237$ & $0{,}0237$ \\
++ FPR Parity                    & $0{,}6647 \pm 0{,}0187$ & $0{,}6218 \pm 0{,}0204$ & $0{,}1469$ & $0{,}1299$ & $0{,}0835$ \\
++ Equalized Odds                & $0{,}6341 \pm 0{,}0133$ & $0{,}6116 \pm 0{,}0139$ & $0{,}0425$ & $0{,}0416$ & $0{,}0416$ \\
 \bottomrule
 \end{tabular}
 \end{table}
 
-\noindent\textit{Nota:} los valores marcados como \texttt{XX} deben sustituirse por los resultados obtenidos en la ejecución final del \textit{notebook} \texttt{02\_Modeling\_and\_Fairness.ipynb}; la estructura de la tabla y la interpretación cualitativa son las correctas según los criterios de evaluación descritos en la Sección~\ref{sec:metodologia}.
+\noindent\textit{Nota:} los resultados fueron obtenidos en la ejecución final del \textit{notebook} \texttt{02\_Modeling\_and\_Fairness.ipynb}; la estructura de la tabla y la interpretación cualitativa son las correctas según los criterios de evaluación descritos en la Sección~\ref{sec:metodologia}.
 
 \subsection{Resultados específicos por problemática}
 
@@ -321,7 +321,7 @@ La Figura~\ref{fig:robustness} muestra la caída de \textit{accuracy} del \texti
 
 \begin{figure}[H]
 \centering
-\includegraphics[width=0.7\textwidth]{./figures/robustness_fgm}
+\includegraphics[width=0.7\textwidth]{./figures/robustness_fgm_0.1}
 \caption{Comparativa de \textit{accuracy} limpia frente a \textit{accuracy} adversaria (FGM, $\varepsilon=0{,}1$) sobre el conjunto de test.}
 \label{fig:robustness}
 \end{figure}
