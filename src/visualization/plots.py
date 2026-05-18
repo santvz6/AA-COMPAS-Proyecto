@@ -230,7 +230,7 @@ def plot_confusion_matrices(y_true, predictions_dict: dict,
 
 
 # ── 6. Robustness Summary ────────────────────────────────────────────────────
-def plot_robustness_summary(robustness_results: dict, save_path: str = None):
+def plot_robustness_summary(robustness_results: dict, eps: float, save_path: str = None):
     """
     Horizontal bar chart comparing clean vs adversarial accuracy.
 
@@ -252,7 +252,7 @@ def plot_robustness_summary(robustness_results: dict, save_path: str = None):
     ax.set_xlim(0, 1)
     ax.set_xlabel('Accuracy')
     ax.set_title(
-        f'Robustez Adversaria — Ataque FGM (ε=0.1)\n'
+        f'Robustez Adversaria — Ataque FGM (ε={eps})\n'
         f'Caída: {robustness_results["robustness_drop"]:.3f}',
         fontsize=11
     )
