@@ -59,7 +59,7 @@
 \author{
     \textbf{Santiago Álvarez Geanta}\thanks{\texttt{sag82@alu.ua.es}}
     \quad
-    \textbf{Taron Sargsyan}\thanks{\texttt{[correo@alu.ua.es]}}
+    \textbf{Taron Sargsyan}\thanks{\texttt{ts73@alu.ua.es}}
     \quad
     \textbf{Joaquín Sigüenza Chilar}\thanks{\texttt{jsc114@alu.ua.es}}
     \\[4pt]
@@ -266,17 +266,17 @@ La Tabla~\ref{tab:resultados} compara el rendimiento del \textit{baseline} con l
 
 \begin{table}[H]
 \centering
-\caption{Comparativa de resultados. AUC-ROC y F1: media~$\pm$~desv.\ estándar sobre validación cruzada 5~\textit{folds}. DPD, EOD y FPR diff.\ sobre test (intervalo $[0,1]$, menor es mejor).}
+\caption{Comparativa de resultados. AUC-ROC y F1: media~$\pm$~desv.\ estándar sobre validación cruzada 5~\textit{folds}. Accuracy, DPD, EOD y FPR diff.\ sobre test (para las métricas de equidad, el intervalo es $[0,1]$ y menor es mejor).}
 \label{tab:resultados}
 \small
-\begin{tabular}{@{}lccccc@{}}
+\begin{tabular}{@{}lcccccc@{}}
 \toprule
-\textbf{Modelo / Configuración} & \textbf{AUC-ROC} & \textbf{F1} & \textbf{DPD} & \textbf{EOD} & \textbf{FPR diff.}\\
+\textbf{Modelo / Configuración} & \textbf{Accuracy} & \textbf{AUC-ROC} & \textbf{F1} & \textbf{DPD} & \textbf{EOD} & \textbf{FPR diff.}\\
 \midrule
-\textit{Baseline} (Reg. Log.)   & $0{,}7312 \pm 0{,}0210$ & $0{,}6393 \pm 0{,}0276$ & $0{,}2899$ & $0{,}3023$ & $0{,}2055$ \\
-+ Demographic Parity            & $0{,}6605 \pm 0{,}0186$ & $0{,}6296 \pm 0{,}0178$ & $0{,}0312$ & $0{,}0237$ & $0{,}0237$ \\
-+ FPR Parity                    & $0{,}6647 \pm 0{,}0187$ & $0{,}6218 \pm 0{,}0204$ & $0{,}1469$ & $0{,}1299$ & $0{,}0835$ \\
-+ Equalized Odds                & $0{,}6341 \pm 0{,}0133$ & $0{,}6116 \pm 0{,}0139$ & $0{,}0425$ & $0{,}0416$ & $0{,}0416$ \\
+\textit{Baseline} (Reg. Log.)   & $0{,}6648$ & $0{,}7312 \pm 0{,}0210$ & $0{,}6393 \pm 0{,}0276$ & $0{,}2899$ & $0{,}3023$ & $0{,}2055$ \\
++ Demographic Parity            & $0{,}6572$ & $0{,}6605 \pm 0{,}0186$ & $0{,}6296 \pm 0{,}0178$ & $0{,}0312$ & $0{,}0237$ & $0{,}0237$ \\
++ FPR Parity                    & $0{,}6572$ & $0{,}6647 \pm 0{,}0187$ & $0{,}6218 \pm 0{,}0204$ & $0{,}1469$ & $0{,}1299$ & $0{,}0835$ \\
++ Equalized Odds                & $0{,}6278$ & $0{,}6341 \pm 0{,}0133$ & $0{,}6116 \pm 0{,}0139$ & $0{,}0425$ & $0{,}0416$ & $0{,}0416$ \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -298,7 +298,7 @@ La Figura~\ref{fig:fairness_comparison} resume la comparación de \textit{accura
 \begin{figure}[H]
 \centering
 \includegraphics[width=0.75\textwidth]{./figures/tradeoff_scatter}
-\caption{\textit{Accuracy-fairness trade-off}: cada punto representa un modelo en el plano (\,FPR diff., \textit{accuracy}\,). El punto ideal está arriba a la izquierda.}
+\caption{\textit{Accuracy-fairness trade-off}: cada punto representa un modelo en el plano (\,FPR diff., \textit{accuracy}\,). El punto ideal está abajo a la derecha.}
 \label{fig:tradeoff}
 \end{figure}
 
